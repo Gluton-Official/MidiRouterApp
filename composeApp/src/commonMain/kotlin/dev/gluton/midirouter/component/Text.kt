@@ -1,5 +1,6 @@
 package dev.gluton.midirouter.component
 
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ fun MidiRouterText(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = MidiRouterTheme.colors.text,
+    autoSize: TextAutoSize? = null,
     fontSize: TextUnit = TextUnit.Unspecified,
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
@@ -39,6 +41,7 @@ fun MidiRouterText(
     text,
     modifier,
     color,
+    autoSize,
     fontSize,
     fontStyle,
     fontWeight,

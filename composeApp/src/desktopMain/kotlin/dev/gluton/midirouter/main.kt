@@ -1,5 +1,7 @@
 package dev.gluton.midirouter
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.multiplatform.webview.util.addTempDirectoryRemovalHook
@@ -13,7 +15,7 @@ fun main() = application {
     ) {
         MidiRouterTheme {
             KCEF(onRestart = ::exitApplication) {
-                MidiRouterWebView()
+                MidiRouterWebView(modifier = Modifier.fillMaxSize())
             }
         }
     }

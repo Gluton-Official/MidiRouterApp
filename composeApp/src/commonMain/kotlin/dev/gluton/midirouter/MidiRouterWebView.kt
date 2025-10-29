@@ -1,27 +1,30 @@
 package dev.gluton.midirouter
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.intl.PlatformLocale
+import com.multiplatform.webview.web.NativeWebView
 import com.multiplatform.webview.web.WebView
-import com.multiplatform.webview.web.WebViewFileReadType
-import com.multiplatform.webview.web.rememberWebViewStateWithHTMLFile
-import midirouterapp.composeapp.generated.resources.Res
+import com.multiplatform.webview.web.WebViewState
 
 @Composable
 fun MidiRouterWebView(
     modifier: Modifier = Modifier,
 ) {
-    val webViewState = rememberWebViewStateWithHTMLFile(
-        fileName = Res.getUri("files/midi_router/index.html"),
-        readType = WebViewFileReadType.COMPOSE_RESOURCE_FILES,
-    ).apply {
+    val webViewState = rememberWebViewStateFromHTMLFile("files/midi_router/index.html").apply {
         webSettings.androidWebSettings.allowMidiSysexMessages = true
     }
 
     WebView(
         state = webViewState,
         captureBackPresses = false,
-        modifier = modifier then Modifier.fillMaxSize(),
+        modifier = modifier,
+        onCreated = ::setupNativeWebView
     )
 }
+
+@Composable
+expect fun rememberWebViewStateFromHTMLFile(path: String): WebViewState
+
+expect fun setupNativeWebView(nativeWebView: NativeWebView)
